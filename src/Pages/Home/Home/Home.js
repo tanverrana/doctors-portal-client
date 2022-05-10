@@ -3,6 +3,7 @@ import React from 'react';
 import Banner from '../Banner/Banner';
 import Info from '../Info/Info';
 import Services from '../Services/Services';
+import Testimonials from '../Testimonials/Testimonials';
 import MakeAppoinment from './MakeAppoinment/MakeAppoinment';
 
 
@@ -13,6 +14,7 @@ const Home = () => {
             <Info></Info>
             <Services></Services>
             <MakeAppoinment></MakeAppoinment>
+            <Testimonials></Testimonials>
         </div>
     );
 };
