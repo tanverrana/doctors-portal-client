@@ -12,7 +12,7 @@ import MakeAppoinment from './MakeAppoinment/MakeAppoinment';
 
 const Home = () => {
     return (
-        <div className="px-20">
+        <div>
             <Banner></Banner>
             <Info></Info>
             <Services></Services>
