@@ -18,7 +18,7 @@ const Login = () => {
     ] = useSignInWithEmailAndPassword(auth);
     let signInErrorMessage;
 
-    const [token] = useToken(user || user)
+    const [token] = useToken(user || gUser)
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,9 +31,9 @@ const Login = () => {
         }
     }, [token, from, navigate])
 
-    if (user || gUser) {
+    /* if (user || gUser) {
         navigate(from, { replace: true });
-    }
+    } */
     if (loading || gLoading) {
         return <Loading></Loading>
     }
