@@ -32,7 +32,7 @@ const MyAppointments = () => {
                     setAppointments(data)
                 });
         }
-    }, [user])
+    }, [user]);
     return (
         <div>
             <h2>My Appointments:{appointments.length}</h2>
