@@ -1,13 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import Loading from '../../Shared/Loading';
 
 const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { data: services, isLoading } = useQuery("services", () => fetch("http://localhost:5000/service").then(res => res.json()))
     const onSubmit = async data => {
-
         console.log("data", data);
-        //navigate("/appointment");
     };
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div>
             <h2 className="text-3xl">Add a New Doctor</h2>
@@ -58,19 +62,16 @@ const AddDoctor = () => {
                     <label class="label">
                         <span class="label-text">Specialty</span>
                     </label>
-                    <input
-                        {...register("specialty", {
-                            required: {
-                                value: true,
-                                message: "Specialization is required"
-                            }
-                        })}
-                        type="text" placeholder="Enter Doctor Specialty" class="input input-bordered w-full max-w-xs" />
-                    <label class="label">
-                        {errors.password?.type === 'required' && <span class="label-text-alt text-red-600">{errors.password.message}</span>}
-                        {errors.password?.type === 'minLength' && <span class="label-text-alt text-red-600">{errors.password.message}</span>}
+                    <select {...register("specialty")} class="select w-full max-w-xs">
+                        {
+                            services.map(service => <option
+                                key={service._id}
+                                value={service.name}
+                            >{service.name}</option>)
+                        }
 
-                    </label>
+                    </select>
+
                 </div>
 
                 <input className="btn w-full max-w-xs" type="submit" value="Add Doctor" />
