@@ -1,10 +1,12 @@
+import id from 'date-fns/esm/locale/id/index.js';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import Loading from '../../Shared/Loading';
 
 const AddDoctor = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { data: services, isLoading } = useQuery("services", () => fetch("http://localhost:5000/service").then(res => res.json()))
 
     const imageStorageKey = "1087464023ac2b6949f371c9195dddbf";
@@ -41,7 +43,13 @@ const AddDoctor = () => {
                     })
                         .then(res => res.json())
                         .then(inserted => {
-                            console.log("doctor", inserted)
+                            if (inserted.insertedId) {
+                                toast.success("Doctor added Successfully");
+                                reset();
+                            }
+                            else {
+                                toast.error("Failed to added doctor");
+                            }
                         })
                 }
 
